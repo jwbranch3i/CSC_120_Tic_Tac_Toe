@@ -11,7 +11,6 @@ def prnBoard(board):
       print(rowSep)
 
 
-
 # Function to check if space is free
 def isFree(row, col, board):
    free = False
@@ -23,13 +22,13 @@ def isFree(row, col, board):
 # Function to check if selection is valid
 def isValid(row, col):
    good = True
-   if ((row-1)<1 or (row-1)>3) or ((col-1)<1 or (col-1)):
+   if (row<1 or row>3) or (col<1 or col>3):
       good = False
    return good
 
 # Function to set marker on board
-def setMarker(row, col,board):
-   board[row-1][col-1]
+def setMarker(row, col,board, marker):
+   board[row-1][col-1] = marker
 
 # Function to check for a winner
 def isWinner(board):
@@ -49,7 +48,7 @@ def isWinner(board):
          winner = "X"
 
    line = board[0][0].strip() + board[1][1].strip() + board[2][2].strip()
-      if line == "OOO":
+   if line == "OOO":
       winner = "O"
    elif line == "XXX":
       winner = "X"
@@ -63,11 +62,12 @@ def isWinner(board):
    return winner
 
 # Main program for Tic-Tac-Toe
-print("Thanks for playing Tic-Tac-Toe")
+print("\nWelcome to my Tic-Tac-Toe game")
+print("Player 1 is 'O', Player 2 is 'X'\n")
 
 # create board for new game
 board = []
-row1 = ["-", "-", "-"]
+row1 = ["-", "-", "-"]  
 row2 = ["-", "-", "-"]
 row3 = ["-", "-", "-"]
 board.append(row1)
@@ -79,24 +79,33 @@ activePlayer = "1"
 while(notDone):
    prnBoard(board)
    print("Player " + activePlayer + " it's your turn")
-   selectedRow = input("Enter row (1-3): ")
-   selectedCol = input("Enter column (1-3):")
+   selectedRow = int(input("Enter row (1-3): "))
+   selectedCol = int(input("Enter column (1-3): "))
 
    validChoice = isFree(selectedRow, selectedCol, board)
    if validChoice:
-      marker = " O "
+      marker = "O"
       if activePlayer == "2":
-         marker = " X"
+         marker = "X"
 
-      setMarker(selectedRow, selectedCol, board)
+      setMarker(selectedRow, selectedCol, board, marker)
+      winner = isWinner(board)  
+      if winner == "-":
+         if activePlayer == "2":
+            activePlayer = "1"
+         else:
+            activePlayer = "2"
+      else:
+         notDone = False
+
    else:
       print("Invalid selection.")
 
+prnBoard(board)
+print("Player " + activePlayer + " is the winner!!")
+
+print("Thank you for playing\n")
 
 
-   notDone = False
 
-
-
-
-
+ 
