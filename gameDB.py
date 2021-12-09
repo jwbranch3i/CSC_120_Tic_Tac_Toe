@@ -1,5 +1,6 @@
 import sqlite3
 
+#set up database
 def dbSetup():
    db = sqlite3.connect("TicTacToe.db")
    db.execute("CREATE TABLE IF NOT EXISTS games(\
