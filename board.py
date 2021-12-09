@@ -99,7 +99,7 @@ while(notDone):
          notDone = False
 
    else:
-      print("Invalid selection.")
+      print("*** Invalid selection. ***")
 
 prnBoard(board)
 print("Player " + activePlayer + " is the winner!!")
